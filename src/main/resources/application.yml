@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jwt_4_db
+    username: db_user
+    password: db_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+logging:
+  level:
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql: WARN
+    org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator: WARN
+
+jwt4:
+  app:
+    jwtSecret: m9QJxZx2v8mK4y9A8n0VZzK5kC4f5pQFJ8sZ3Yy1cKkX9x5K0pVZyQZzZyKZ1mF6A7bN3cP2dQ8eR5fT9gU4hV1iW6jX
+    jwtExpirationMs: 86400000
