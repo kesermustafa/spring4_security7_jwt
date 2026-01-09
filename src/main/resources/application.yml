@@ -16,8 +16,10 @@ spring:
       hibernate:
         format_sql: false
 
+
 logging:
   level:
+    com.example.jwt.exception: WARN
     org.hibernate.SQL: WARN
     org.hibernate.type.descriptor.sql: WARN
     org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator: WARN

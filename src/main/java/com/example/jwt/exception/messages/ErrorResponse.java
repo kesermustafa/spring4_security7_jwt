@@ -1,0 +1,17 @@
+package com.example.jwt.exception.messages;
+
+import lombok.Builder;
+import lombok.Data;
+import java.util.Map;
+
+@Data
+@Builder
+public class ErrorResponse {
+    private int status;
+    private String error;
+    private String message;
+    private String path;
+    private String timestamp;
+    private String requestId;
+    private Map<String, ?> details;
+}
