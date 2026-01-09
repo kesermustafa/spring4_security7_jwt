@@ -26,5 +26,7 @@ logging:
 
 jwt4:
   app:
-    jwtSecret: m9QJxZx2v8mK4y9A8n0VZzK5kC4f5pQFJ8sZ3Yy1cKkX9x5K0pVZyQZzZyKZ1mF6A7bN3cP2dQ8eR5fT9gU4hV1iW6jX
-    jwtExpirationMs: 86400000
+    accessSecret: m9QJxZx2v8mK4y9A8n0VZzK5kC4f5pQFJ8sZ3Yy1cKkX9x5K0pVZyQZzZyKZ1mF6A7bN3cP2dQ8eR5fT9gU4hV1iW6jX
+    refreshSecret: 8DQJxZx2v8mK4y9A8n0VZzK5kC4f5pQFJ8sZ3Yy1cKkX9x5K0pVZyQZzZyKZ1mF6A7bN3cP2dQ8eR5fT9gU4hV1iWkLm
+    jwtExpirationMs: 900000          # 15 dk
+    refreshExpirationMs: 604800000   # 7 gün

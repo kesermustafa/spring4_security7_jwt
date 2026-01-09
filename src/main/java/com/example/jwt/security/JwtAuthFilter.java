@@ -36,19 +36,38 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         String jwt = authHeader.substring(7);
-        String username = jwtService.extractUsername(jwt);
+
+        // 🔐 Sadece ACCESS token kabul edilir
+        if (!jwtService.isAccessToken(jwt)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String email = jwtService.extractEmailFromAccessToken(jwt);
 
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
+
             UserDetails userDetails =
-                    userDetailsService.loadUserByUsername(username);
+                    userDetailsService.loadUserByUsername(email);
 
             UsernamePasswordAuthenticationToken authToken =
                     new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
+                            userDetails,
+                            null,
+                            userDetails.getAuthorities()
+                    );
 
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.startsWith("/auth/refresh")
+                || path.startsWith("/auth/login")
+                || path.startsWith("/auth/register");
     }
 }

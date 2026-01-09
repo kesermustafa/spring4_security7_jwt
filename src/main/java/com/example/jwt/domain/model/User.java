@@ -1,4 +1,5 @@
-package com.example.jwt.domain;
+
+package com.example.jwt.domain.model;
 
 import com.example.jwt.domain.enums.Role;
 import jakarta.persistence.*;
@@ -29,3 +30,4 @@ public class User {
 
     private boolean enabled = true;
 }
+

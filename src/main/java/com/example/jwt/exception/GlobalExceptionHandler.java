@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    // ========== Validation Exceptions ==========
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -109,7 +108,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    // ========== Custom Business Exceptions ==========
+
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<Object> handleEmailExists(EmailAlreadyExistsException ex) {
@@ -135,6 +134,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(ApiResponse.error(ex.getMessage()));
     }
 
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity<Object> handleSecurity(SecurityException ex) {
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(ApiResponse.error(ex.getMessage()));
+    }
+
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<Object> handleBadRequest(BadRequestException ex) {
         log.warn("Bad request: {}", ex.getMessage());
@@ -143,7 +149,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(ApiResponse.error(ex.getMessage()));
     }
 
-    // ========== Security Exceptions ==========
+
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Object> handleAccessDeniedException(
@@ -183,7 +189,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(error);
     }
 
-    // ========== Method Argument Type Mismatch ==========
+
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
@@ -208,7 +214,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(error);
     }
 
-    // ========== Generic Exception Handler ==========
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGenericException(
@@ -229,7 +235,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(error);
     }
 
-    // ========== Helper Methods ==========
 
     private String extractPath(WebRequest request) {
         return request.getDescription(false).replace("uri=", "");

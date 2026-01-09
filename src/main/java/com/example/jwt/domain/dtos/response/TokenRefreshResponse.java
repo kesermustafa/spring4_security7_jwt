@@ -1,6 +1,6 @@
 package com.example.jwt.domain.dtos.response;
 
-public record AuthResponse(
+public record TokenRefreshResponse(
         String accessToken,
         String refreshToken
 ) {}
